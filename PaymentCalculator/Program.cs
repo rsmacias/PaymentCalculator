@@ -129,6 +129,7 @@ namespace PaymentCalculator {
                     Console.WriteLine("--------------------------------------------------------");
                     Console.WriteLine($"Final Hours     >>>> {totalHours}");
                     Console.WriteLine($"Final Payment   >>>> {moneyToPay}");
+                    Console.WriteLine($"The amount to pay {employeeSchedule.EmployeeName} is: {moneyToPay} USD ");
 
                 }
 
@@ -136,7 +137,6 @@ namespace PaymentCalculator {
 
             Console.ReadKey();
         }
-
 
     }
 }
