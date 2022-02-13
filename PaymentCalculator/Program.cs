@@ -74,7 +74,7 @@ namespace PaymentCalculator {
             return 0;
         }*/
 
-        
+
         static void Main(string[] args) {
 
             var builder = new ConfigurationBuilder()
@@ -149,63 +149,73 @@ namespace PaymentCalculator {
 
 
             // CALCULO DE VALORES A PAGAR
-            //foreach (var employeeSchedule in EmployeesScheduleWorked) {
-            //    Console.WriteLine($"Employee: {employeeSchedule.EmployeeName}");
-            //    foreach (var workedDay in employeeSchedule.Schedule) {
-            //        var day = workedDay.Day;
-            //        var start = workedDay.StartTime;
-            //        var end = workedDay.EndTime;
-            //        var configToApply = paymentConfig.Where(c => c.Day.Equals(day)
-            //                    && ((c.StartTime <= start && c.EndTime >= start)
-            //                    || (c.StartTime <= end && c.EndTime >= end))
-            //                    ).ToList();
-            //    }
+            foreach (var employeeSchedule in EmployeesScheduleWorked) {
+                double moneyToPay = 0;
+                double totalHours = 0;
 
-            //}
+                Console.WriteLine(string.Empty);
+                Console.WriteLine("--------------------------------------------------------");
+                Console.WriteLine($"Employee: {employeeSchedule.EmployeeName}");
+                foreach (var workedDay in employeeSchedule.Schedule) {
+                    var day = workedDay.Day;
+                    var start = workedDay.StartTime;
+                    var end = workedDay.EndTime;
 
-            double moneyToPay = 0;
-            var start = new DateTime(2022, 02, 12, 8, 0, 0); //8   15    10
-            var end = new DateTime(2022, 02, 12, 13, 0, 0); // 13   19    12
-            var configToApply = paymentConfig.Where(c => c.Day.Equals("MO")
+                    // Filtro de la configuración los rangos de horas a aplicar
+                    var configToApply = paymentConfig.Where(c => c.Day.Equals(day)
                                 && ((c.StartTime <= start && c.EndTime >= start)
                                 || (c.StartTime <= end && c.EndTime >= end))
                                 ).ToList();
 
-            double totalHours = 0;
-            
-            foreach (var rangeConfigPayment in configToApply) {
-                var salary = (double) rangeConfigPayment.Salary;
-                var hours = GetWorkingHours(rangeConfigPayment.StartTime, rangeConfigPayment.EndTime, start, end);
-                Console.WriteLine($"Config   >>>> {rangeConfigPayment.StartTime.ToShortTimeString()} - {rangeConfigPayment.EndTime.ToShortTimeString()}");
-                Console.WriteLine($"Workging >>>> {start.ToShortTimeString()} - {end.ToShortTimeString()}");
-                Console.WriteLine($"Hours    >>>> {Math.Ceiling(hours)}");
-                Console.WriteLine($"Paying   >>>> {Math.Ceiling(hours) * salary}");
+                    foreach (var rangeConfigPayment in configToApply) {
+                        var salaryByHour = (double)rangeConfigPayment.Salary;
+                        var workedHours = GetWorkingHours(rangeConfigPayment.StartTime, rangeConfigPayment.EndTime, start, end);
+                        Console.WriteLine("--------------------------------------------------------");
+                        Console.WriteLine($"Config Range Hours   >>>> {rangeConfigPayment.StartTime.ToShortTimeString()} - {rangeConfigPayment.EndTime.ToShortTimeString()}");
+                        Console.WriteLine($"Working Range Hours  >>>> {start.ToShortTimeString()} - {end.ToShortTimeString()}");
+                        Console.WriteLine($"Workend Hours        >>>> {Math.Ceiling(workedHours)}");
+                        Console.WriteLine($"Payment to do        >>>> {Math.Ceiling(workedHours) * salaryByHour}");
 
-                totalHours += Math.Ceiling(hours);
-                moneyToPay += (Math.Ceiling(hours) * salary);
+                        totalHours += Math.Ceiling(workedHours);
+                        moneyToPay += (Math.Ceiling(workedHours) * salaryByHour);
+                    }
+                    Console.WriteLine("--------------------------------------------------------");
+                    Console.WriteLine($"Final Hours     >>>> {totalHours}");
+                    Console.WriteLine($"Final Payment   >>>> {moneyToPay}");
+
+                }
+
             }
-            Console.WriteLine("--------------------------------------------------------");
-            Console.WriteLine($"Total Hours    >>>> {totalHours}");
-            Console.WriteLine($"Total Paying   >>>> {moneyToPay}");
 
-            //if (configToApply.Count > 1) {
-            //    foreach (var range in configToApply) {
+            //double moneyToPay = 0;
+            //var start = new DateTime(2022, 02, 12, 8, 0, 0); //8   15    10
+            //var end = new DateTime(2022, 02, 12, 13, 0, 0); // 13   19    12
+            //var configToApply = paymentConfig.Where(c => c.Day.Equals("MO")
+            //                    && ((c.StartTime <= start && c.EndTime >= start)
+            //                    || (c.StartTime <= end && c.EndTime >= end))
+            //                    ).ToList();
 
-            //    }
-            //} else {
-            //    double hoursToPay = end.Subtract(start).TotalHours;
-            //    double moneyXHour = (double)configToApply.FirstOrDefault().Salary;
-            //    moneyToPay = moneyXHour * hoursToPay;
+            //double totalHours = 0;
+
+            //foreach (var rangeConfigPayment in configToApply) {
+            //    var salary = (double)rangeConfigPayment.Salary;
+            //    var hours = GetWorkingHours(rangeConfigPayment.StartTime, rangeConfigPayment.EndTime, start, end);
+            //    Console.WriteLine($"Config   >>>> {rangeConfigPayment.StartTime.ToShortTimeString()} - {rangeConfigPayment.EndTime.ToShortTimeString()}");
+            //    Console.WriteLine($"Workging >>>> {start.ToShortTimeString()} - {end.ToShortTimeString()}");
+            //    Console.WriteLine($"Hours    >>>> {Math.Ceiling(hours)}");
+            //    Console.WriteLine($"Paying   >>>> {Math.Ceiling(hours) * salary}");
+
+            //    totalHours += Math.Ceiling(hours);
+            //    moneyToPay += (Math.Ceiling(hours) * salary);
             //}
+            //Console.WriteLine("--------------------------------------------------------");
+            //Console.WriteLine($"Total Hours    >>>> {totalHours}");
+            //Console.WriteLine($"Total Paying   >>>> {moneyToPay}");
 
 
-
-
-
-            
             Console.ReadKey();
         }
 
-        
+
     }
 }
