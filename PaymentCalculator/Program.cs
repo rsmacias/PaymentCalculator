@@ -25,6 +25,9 @@ namespace PaymentCalculator {
                 var employeesScheduleWorked = LoadInputData();
 
                 // CALCULO DE VALORES A PAGAR
+
+
+
                 foreach (var employeeSchedule in employeesScheduleWorked) {
                     double moneyToPay = 0;
                     double totalHours = 0;

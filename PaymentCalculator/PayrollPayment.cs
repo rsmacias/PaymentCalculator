@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace PaymentCalculator {
-    public class PayrollPayment {
+    public class PayrollPayment : IPayrollPayment {
 
         private readonly List<PaymentConfiguration> _paymentConfig = null;
         private readonly IPaymentCalculator _paymentCalculator = null;
