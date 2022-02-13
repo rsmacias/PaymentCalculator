@@ -44,45 +44,6 @@ namespace PaymentCalculator {
                     Console.WriteLine("--------------------------------------------------------");
                 }
 
-
-                //foreach (var employeeSchedule in employeesScheduleWorked) {
-                //    double moneyToPay = 0;
-                //    double totalHours = 0;
-
-                //    Console.WriteLine(string.Empty);
-                //    Console.WriteLine("--------------------------------------------------------");
-                //    Console.WriteLine($"Employee: {employeeSchedule.EmployeeName}");
-                //    foreach (var workedDay in employeeSchedule.Schedule) {
-                //        var day = workedDay.Day;
-                //        var start = workedDay.StartTime;
-                //        var end = workedDay.EndTime;
-
-                //        // Filtro de la configuración los rangos de horas a aplicar
-                //        var configToApply = paymentConfig.Where(c => c.Day.Equals(day)
-                //                    && ((c.StartTime <= start && c.EndTime >= start)
-                //                    || (c.StartTime <= end && c.EndTime >= end))
-                //                    ).ToList();
-
-                //        foreach (var rangeConfigPayment in configToApply) {
-                //            var salaryByHour = rangeConfigPayment.AmountByHour;
-                //            var workedHours = GetWorkingHours(rangeConfigPayment.StartTime, rangeConfigPayment.EndTime, start, end);
-                //            Console.WriteLine("--------------------------------------------------------");
-                //            Console.WriteLine($"Day..................>>>> {day}");
-                //            Console.WriteLine($"Salary by hour.......>>>> {salaryByHour} USD");
-                //            Console.WriteLine($"Config Range Hours...>>>> {rangeConfigPayment.StartTime.ToShortTimeString()} - {rangeConfigPayment.EndTime.ToShortTimeString()}");
-                //            Console.WriteLine($"Working Range Hours..>>>> {start.ToShortTimeString()} - {end.ToShortTimeString()}");
-                //            Console.WriteLine($"Worked Hours.........>>>> {Math.Ceiling(workedHours)}");
-                //            Console.WriteLine($"Payment to do........>>>> {Math.Ceiling(workedHours) * salaryByHour}");
-
-                //            totalHours += Math.Ceiling(workedHours);
-                //            moneyToPay += (Math.Ceiling(workedHours) * salaryByHour);
-                //        }
-                //    }
-                //    Console.WriteLine("--------------------------------------------------------");
-                //    Console.WriteLine($"Final Hours.....>>>> {totalHours}");
-                //    Console.WriteLine($"Final Payment...>>>> {moneyToPay}");
-                //    Console.WriteLine($"The amount to pay {employeeSchedule.EmployeeName} is: {moneyToPay} USD ");
-                //}
             } catch (Exception e) {
                 Console.WriteLine($"Error not expected. \r\nDetails: {e.Message}");
             }

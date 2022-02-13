@@ -47,20 +47,12 @@ namespace PaymentCalculator {
                                     ).ToList();
 
                         foreach (var rangeConfigPayment in configToApply) {
-                            //var configRange = new Schedule(rangeConfigPayment.StartTime, rangeConfigPayment.EndTime);
-                            //var workedRange = new Schedule(start, end);
                             _paymentCalculator.ConfigRangeHours = new Schedule(rangeConfigPayment.StartTime, rangeConfigPayment.EndTime);
                             _paymentCalculator.WorkedRangeHours = new Schedule(start, end);
                             _paymentCalculator.AmountByHour = rangeConfigPayment.AmountByHour;
 
                             totalHours += _paymentCalculator.GetWorkingHours();
                             moneyToPay += _paymentCalculator.Compute();
-
-                            //var amountByHour = rangeConfigPayment.AmountByHour;
-                            //var workedHours = _paymentCalculator.GetWorkingHours(rangeConfigPayment.StartTime, rangeConfigPayment.EndTime, start, end);
-
-                            //totalHours += Math.Ceiling(workedHours);
-                            //moneyToPay += (Math.Ceiling(workedHours) * amountByHour);
                         }
                     }
                     employeePayment.TotalHours = totalHours;
