@@ -48,6 +48,7 @@ namespace PaymentCalculator {
                             var workedHours = GetWorkingHours(rangeConfigPayment.StartTime, rangeConfigPayment.EndTime, start, end);
                             Console.WriteLine("--------------------------------------------------------");
                             Console.WriteLine($"Day..................>>>> {day}");
+                            Console.WriteLine($"Salary by hour.......>>>> {salaryByHour} USD");
                             Console.WriteLine($"Config Range Hours...>>>> {rangeConfigPayment.StartTime.ToShortTimeString()} - {rangeConfigPayment.EndTime.ToShortTimeString()}");
                             Console.WriteLine($"Working Range Hours..>>>> {start.ToShortTimeString()} - {end.ToShortTimeString()}");
                             Console.WriteLine($"Worked Hours.........>>>> {Math.Ceiling(workedHours)}");
@@ -63,7 +64,7 @@ namespace PaymentCalculator {
                     Console.WriteLine($"The amount to pay {employeeSchedule.EmployeeName} is: {moneyToPay} USD ");
                 }
             } catch (Exception e) {
-                throw;
+                Console.WriteLine($"Error not expected. \r\nDetails: {e.Message}");
             }
 
             Console.ReadKey();
@@ -76,6 +77,10 @@ namespace PaymentCalculator {
 
             var result2 = DateTime.Compare(worked_end_time, config_end_time);
             var fin = result2 < 0 ? worked_end_time : config_end_time;
+
+            var hours = fin.Subtract(ini).TotalHours;
+            if (hours < 0)
+                fin = fin.AddDays(1);
 
             return fin.Subtract(ini).TotalHours;
         }
