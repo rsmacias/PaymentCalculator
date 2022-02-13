@@ -44,7 +44,7 @@ namespace PaymentCalculator {
                                     ).ToList();
 
                         foreach (var rangeConfigPayment in configToApply) {
-                            var salaryByHour = (double)rangeConfigPayment.Salary;
+                            var salaryByHour = rangeConfigPayment.AmountByHour;
                             var workedHours = GetWorkingHours(rangeConfigPayment.StartTime, rangeConfigPayment.EndTime, start, end);
                             Console.WriteLine("--------------------------------------------------------");
                             Console.WriteLine($"Day..................>>>> {day}");
@@ -113,7 +113,7 @@ namespace PaymentCalculator {
                         Day = fields[0],
                         StartTime = inicio,
                         EndTime = fin,
-                        Salary = decimal.Parse(fields[3])
+                        AmountByHour = double.Parse(fields[3])
                     });
                     //Console.WriteLine($"Day: {fields[0]}, StartHour:{fields[1]}, EndHour:{fields[2]}, Payment:{fields[3]}");
                 }

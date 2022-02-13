@@ -39,11 +39,11 @@ namespace PaymentCalculator {
                                     ).ToList();
 
                         foreach (var rangeConfigPayment in configToApply) {
-                            var salaryByHour = (double)rangeConfigPayment.Salary;
+                            var amountByHour = rangeConfigPayment.AmountByHour;
                             var workedHours = _paymentCalculator.GetWorkingHours(rangeConfigPayment.StartTime, rangeConfigPayment.EndTime, start, end);
 
                             totalHours += Math.Ceiling(workedHours);
-                            moneyToPay += (Math.Ceiling(workedHours) * salaryByHour);
+                            moneyToPay += (Math.Ceiling(workedHours) * amountByHour);
                         }
                     }
                     employeePayment.TotalHours = totalHours;
