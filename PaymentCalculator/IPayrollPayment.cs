@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace PaymentCalculator {
     public interface IPayrollPayment {
+        List<PaymentConfiguration> PaymentConfig { set; }
         List<SchedulePaid> Pay(List<ScheduleWorked> employeesWorkSchedule);
     }
 }

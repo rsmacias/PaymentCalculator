@@ -7,13 +7,21 @@ using System.Threading.Tasks;
 namespace PaymentCalculator {
     public class PayrollPayment : IPayrollPayment {
 
-        private readonly List<PaymentConfiguration> _paymentConfig = null;
+        private List<PaymentConfiguration> _paymentConfig = null;
         private readonly IPaymentCalculator _paymentCalculator = null;
 
         public PayrollPayment(List<PaymentConfiguration> paymentConfig,
                               IPaymentCalculator paymentCalculator) {
             _paymentConfig = paymentConfig;
             _paymentCalculator = paymentCalculator;
+        }
+
+        public PayrollPayment(IPaymentCalculator paymentCalculator) {
+            _paymentCalculator = paymentCalculator;
+        }
+
+        public List<PaymentConfiguration> PaymentConfig {
+            set { _paymentConfig = value; }
         }
 
         public List<SchedulePaid> Pay(List<ScheduleWorked> employeesWorkSchedule) {
