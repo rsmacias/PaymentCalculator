@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace PaymentCalculator {
-    public class ScheduleWorked {
+    public class SchedulePaid {
         public string EmployeeName { get; set; }
-        public List<WorkedDay> Schedule { get; set; } = new List<WorkedDay>();
+        public double TotalHours { get; set; }
+        public double Amount { get; set; }
     }
 }
