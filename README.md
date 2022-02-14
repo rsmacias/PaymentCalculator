@@ -14,6 +14,15 @@ I created a _class library_ project to encapsulate the functionality of calculat
 Inside this _class library_, I've decoupled the main functionality of processing the data by an interface called **IPayrollPayment**. This way it can be used by dependency injection and it could be added new changes without danger in the future.
 The same way it's decoupled the formula to calculate de amounts by another interface called **IPaymentCalculator**.
 
+Thus this _class library_ receives only the necessary input to work:
+* Payment configuration through **List<PaymentConfiguration>** implementation.
+* Input data to work through a **List<ScheduleWorked>**.
+* The proper implementation of how to calculate the salary by **IPaymentCalculator**.
+
+Finally, this _class library_ returns the result through a **List<SchedulePaid>**.
+
+The _classes_ used as **DTO** are placed in the Model folder.
+
 ## Usage
 1. Edit the file **PAYMENT_CONFIG.txt** if you would like to change the configuration of the amounts to pay per hour in the week. Note that this file is tabulated. Consider the following fields as columns of the file:
  - Day, from this _list_:  _MO_: Monday
