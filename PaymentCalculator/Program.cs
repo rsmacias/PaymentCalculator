@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Payment.Lib;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -65,7 +66,7 @@ namespace PaymentCalculator {
             //    2.2.- Configuración de los logs
             var host = Host.CreateDefaultBuilder()
                 .ConfigureServices((context, services) => {
-                    services.AddTransient<IPaymentCalculator, PaymentCalculator>();
+                    services.AddTransient<IPaymentCalculator, Payment.Lib.PaymentCalculator>();
                     services.AddTransient<IPayrollPayment, PayrollPayment>();
                 })
                 .ConfigureLogging(logging => {
