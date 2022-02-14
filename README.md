@@ -16,7 +16,7 @@ The same way it's decoupled the formula to calculate de amounts by another inter
 
 Thus this _class library_ receives only the necessary input to work:
 - Payment configuration through List<PaymentConfiguration> implementation.
-- Input data to work through a List<ScheduleWorked>**.
+- Input data to work through a List<ScheduleWorked>.
 - The proper implementation of how to calculate the salary by IPaymentCalculator.
 
 Finally, this _class library_ returns the result through a List<SchedulePaid>.
