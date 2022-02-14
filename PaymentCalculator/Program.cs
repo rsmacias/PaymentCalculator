@@ -19,18 +19,23 @@ namespace PaymentCalculator {
                 var serviceScope = host.Services.CreateScope();
                 var serviceProvider = serviceScope.ServiceProvider;
 
+                var _log = serviceProvider.GetRequiredService<ILogger<Program>>();
+
                 // CARGA DE CONFIGUACIÓN INICIAL
+                _log.LogInformation("Loading payment configuration...");
                 var paymentConfig = LoadPaymentConfiguation();
 
                 // CARGA DE DATOS DE ENTRADA
+                _log.LogInformation("Loading input data...");
                 var employeesScheduleWorked = LoadInputData();
 
                 // CALCULO DE VALORES A PAGAR
+                _log.LogInformation("Payment processing...");
                 var _payrollPayment = serviceProvider.GetRequiredService<IPayrollPayment>();
                 _payrollPayment.PaymentConfig = paymentConfig;
 
                 var paySheet = _payrollPayment.Pay(employeesScheduleWorked);
-
+                _log.LogInformation("Printing results...");
                 foreach (var payment in paySheet) {
                     Console.WriteLine(string.Empty);
                     Console.WriteLine("--------------------------------------------------------");
@@ -65,6 +70,7 @@ namespace PaymentCalculator {
                 })
                 .ConfigureLogging(logging => {
                     logging.ClearProviders();
+                    logging.AddSimpleConsole(options => options.IncludeScopes = true);
                     logging.AddConsole();
                     logging.AddEventLog();
                 })
