@@ -14,5 +14,27 @@ I created a _class library_ project to encapsulate the functionality of calculat
 Inside this _class library_, I've decoupled the main functionality of processing the data by an interface called **IPayrollPayment**. This way it can be used by dependency injection and it could be added new changes without danger in the future.
 The same way it's decoupled the formula to calculate de amounts by another interface called **IPaymentCalculator**.
 
+## Usage
+1. Edit the file **PAYMENT_CONFIG.txt** if you would like to change the configuration of the amounts to pay per hour in the week. Note that this file is tabulated. Consider the following fields as columns of the file:
+ - Day, from this _list_:  _MO_: Monday
+_TU_: Tuesday
+_WE_: Wednesday
+_TH_: Thursday
+_FR_: Friday
+_SA_: Saturday
+_SU_: Sunday
+ - Start hour to work (_format:_ H:mm)
+ - End hour to work   (_format:_ H:mm)
+ - Amount to pay per hour
+
+  Example:
+```txt
+MO	9:01	18:00	15
+MO	18:01	0:00	20
+TU	0:01	9:00	25
+TU	9:01	18:00	15
+```
+
+
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
