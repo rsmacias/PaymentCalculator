@@ -34,7 +34,14 @@ MO	18:01	0:00	20
 TU	0:01	9:00	25
 TU	9:01	18:00	15
 ```
+2. Edit the file **INPUT_WORKING_HOURS.txt** if you would like to add or change the input data to test the app. Each line of the file describes a work schedule of an employee.
+The string before "=" is the employee name. The string after "=" describes the worked hours each day separated by commas, where the first two characters define the day.
 
+  Example:
+```txt
+RENE=MO10:00-12:00,TU10:00-12:00,TH01:00-03:00,SA14:00-18:00,SU20:00-21:00
+ASTRID=MO10:00-12:00,TH12:00-14:00,SU20:00-21:00
+```
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
