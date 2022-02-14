@@ -15,11 +15,11 @@ Inside this _class library_, I've decoupled the main functionality of processing
 The same way it's decoupled the formula to calculate de amounts by another interface called **IPaymentCalculator**.
 
 Thus this _class library_ receives only the necessary input to work:
-- Payment configuration through List<PaymentConfiguration> implementation.
-- Input data to work through a List<ScheduleWorked>.
-- The proper implementation of how to calculate the salary by IPaymentCalculator.
+- Payment configuration through a list of **PaymentConfiguration**.
+- Input data to work through a list of **ScheduleWorked**.
+- The proper implementation of how to calculate the salary by **IPaymentCalculator**.
 
-Finally, this _class library_ returns the result through a List<SchedulePaid>.
+Finally, this _class library_ returns the result through a list of **SchedulePaid**.
 
 The _classes_ used as **DTO** are placed in the Model folder.
  
