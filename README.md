@@ -86,6 +86,20 @@ The string before "=" is the employee name. The string after "=" describes the w
 RENE=MO10:00-12:00,TU10:00-12:00,TH01:00-03:00,SA14:00-18:00,SU20:00-21:00
 ASTRID=MO10:00-12:00,TH12:00-14:00,SU20:00-21:00
 ```
+3. Edit the **appsettings.json** file to define the path of your local machine where there will be located the previous files:
+
+```json
+{
+  "input": {
+    "file": "D:\\Projects\\INPUT_WORKING_HOURS.txt",
+    "timeFormat": "H:mm"
+  },
+  "paymentConfig": {
+    "file": "D:\\Projects\\PAYMENT_CONFIG.txt",
+    "separator": "\t",
+    "timeFormat": "H:mm"
+  }
+```
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
