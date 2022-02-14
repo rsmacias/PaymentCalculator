@@ -15,13 +15,48 @@ Inside this _class library_, I've decoupled the main functionality of processing
 The same way it's decoupled the formula to calculate de amounts by another interface called **IPaymentCalculator**.
 
 Thus this _class library_ receives only the necessary input to work:
-* Payment configuration through **List<PaymentConfiguration>** implementation.
-* Input data to work through a **List<ScheduleWorked>**.
-* The proper implementation of how to calculate the salary by **IPaymentCalculator**.
+- Payment configuration through **List<PaymentConfiguration>** implementation.
+- Input data to work through a **List<ScheduleWorked>**.
+- The proper implementation of how to calculate the salary by **IPaymentCalculator**.
 
 Finally, this _class library_ returns the result through a **List<SchedulePaid>**.
 
 The _classes_ used as **DTO** are placed in the Model folder.
+ 
+ ## Methodology 
+- The main problem is how to define which configuration applies based on the worked hours. This is done by the following filter on the configuration:
+
+```csharp
+// Filtro de la configuración los rangos de horas a aplicar
+var configToApply = _paymentConfig.Where(c => c.Day.Equals(day)
+                                    && ((c.StartTime <= start && c.EndTime >= start)
+                                    || (c.StartTime <= end && c.EndTime >= end))
+                                    ).ToList();
+```
+
+- With this, the final step is to calculate the worked hours between the difference of configured range hours and the input range hours. This is made by the following method: 
+
+```csharp
+public double GetWorkingHours(Schedule configRangeHours, Schedule workedRangeHours) {
+
+            var config_start_time = configRangeHours.start_time;
+            var config_end_time = configRangeHours.end_time;
+            var worked_start_time = workedRangeHours.start_time;
+            var worked_end_time = workedRangeHours.end_time;
+
+            var result = DateTime.Compare(worked_start_time, config_start_time);
+            var ini = result >= 0 ? worked_start_time : config_start_time;
+
+            var result2 = DateTime.Compare(worked_end_time, config_end_time);
+            var fin = result2 < 0 ? worked_end_time : config_end_time;
+
+            var hours = fin.Subtract(ini).TotalHours;
+            if (hours < 0)
+                fin = fin.AddDays(1);
+
+            return Math.Ceiling(fin.Subtract(ini).TotalHours);
+        }
+```
 
 ## Usage
 1. Edit the file **PAYMENT_CONFIG.txt** if you would like to change the configuration of the amounts to pay per hour in the week. Note that this file is tabulated. Consider the following fields as columns of the file:
