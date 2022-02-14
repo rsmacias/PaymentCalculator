@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace PaymentCalculator {
     class Program {
@@ -13,10 +15,9 @@ namespace PaymentCalculator {
 
         static void Main(string[] args) {
             try {
-                var builder = new ConfigurationBuilder()
-                   .AddJsonFile($"appsettings.json", true, true);
-
-                _config = builder.Build();
+                var host = AppStartup();
+                var serviceScope = host.Services.CreateScope();
+                var serviceProvider = serviceScope.ServiceProvider;
 
                 // CARGA DE CONFIGUACIÓN INICIAL
                 var paymentConfig = LoadPaymentConfiguation();
@@ -25,11 +26,7 @@ namespace PaymentCalculator {
                 var employeesScheduleWorked = LoadInputData();
 
                 // CALCULO DE VALORES A PAGAR
-                IPaymentCalculator _payrollCalculator = null;
-                IPayrollPayment _payrollPayment = null;
-
-                _payrollCalculator = new PaymentCalculator();
-                _payrollPayment = new PayrollPayment(_payrollCalculator);
+                var _payrollPayment = serviceProvider.GetRequiredService<IPayrollPayment>();
                 _payrollPayment.PaymentConfig = paymentConfig;
 
                 var paySheet = _payrollPayment.Pay(employeesScheduleWorked);
@@ -49,6 +46,31 @@ namespace PaymentCalculator {
             }
 
             Console.ReadKey();
+        }
+
+        static IHost AppStartup() {
+            // 1.- Se define el archivo de configuración
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile($"appsettings.json", optional: true, reloadOnChange: true);
+            
+            _config = builder.Build();
+            // 2.- Se define: 
+            //    2.1.- Contenedor de las dependencias
+            //    2.2.- Configuración de los logs
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureServices((context, services) => {
+                    services.AddTransient<IPaymentCalculator, PaymentCalculator>();
+                    services.AddTransient<IPayrollPayment, PayrollPayment>();
+                })
+                .ConfigureLogging(logging => {
+                    logging.ClearProviders();
+                    logging.AddConsole();
+                    logging.AddEventLog();
+                })
+                .Build();
+
+            return host;
         }
 
         /// <summary>
