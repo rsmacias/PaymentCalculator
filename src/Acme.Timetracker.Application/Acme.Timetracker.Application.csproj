@@ -15,8 +15,4 @@
     <ProjectReference Include="..\Acme.Timetracker.Domain\Acme.Timetracker.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="UseCases\" />
-  </ItemGroup>
-
 </Project>
