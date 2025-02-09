@@ -1,7 +1,12 @@
 <Project>
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
+        <LangVersion>12</LangVersion>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <Description>Challenge application for calculating how much money the employees need to receive for their work done.</Description>
+        <Company>ACME</Company>
+        <Authors>Robert Macías</Authors>
+        <Product>DDD</Product>
     </PropertyGroup>
 </Project>
