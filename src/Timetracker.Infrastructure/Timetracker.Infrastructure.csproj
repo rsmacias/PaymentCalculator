@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\Acme.Timetracker.Application\Acme.Timetracker.Application.csproj" />
+    <ProjectReference Include="..\Timetracker.Application\Timetracker.Application.csproj" />
   </ItemGroup>
 
 </Project>

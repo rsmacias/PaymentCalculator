@@ -6,7 +6,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Acme.Timetracker.Domain\Acme.Timetracker.Domain.csproj" />
+    <ProjectReference Include="..\Timetracker.Domain\Timetracker.Domain.csproj" />
   </ItemGroup>
 
 </Project>
