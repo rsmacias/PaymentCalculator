@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <ItemGroup>
-    <PackageReference Include="MediatR" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="MediatR" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Timetracker.Domain\Timetracker.Domain.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Timetracker.Domain\Timetracker.Domain.csproj" />
+	</ItemGroup>
 
 </Project>
