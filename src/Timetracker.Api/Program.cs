@@ -1,6 +1,10 @@
+using Acme.Timetracker.Infrastructure;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<TimetrackerContext>(options => options.UseSqlServer(@"Server=(LocalDb)\MSSQLLocalDB;Database=TimetrackerDB;TrustServerCertificate=True;Trusted_Connection=True;"));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
