@@ -20,10 +20,19 @@ internal sealed class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
             .HasMaxLength(200)
             .HasConversion(lastName => lastName.Value, value => new LastName(value));
 
+        builder.Property(e => e.BirthDate)
+            .IsRequired();
+
+        builder.Property(e => e.Gender)
+            .IsRequired()
+            .HasConversion<int>();
+
         builder.Property(e => e.Role)
             .HasConversion<int>();
 
         builder.Property(e => e.CreatedOnUtc)
-            .HasDefaultValue(DateTime.UtcNow);
+            .HasDefaultValue(DateTimeOffset.UtcNow);
+
+        builder.Property(e => e.UpdatedOnUtc);
     }
 }
