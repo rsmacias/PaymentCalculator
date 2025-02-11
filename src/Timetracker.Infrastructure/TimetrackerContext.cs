@@ -1,4 +1,5 @@
-﻿using Acme.Timetracker.Domain.Employees;
+﻿using Acme.Timetracker.Domain.Departments;
+using Acme.Timetracker.Domain.Employees;
 using Microsoft.EntityFrameworkCore;
 
 namespace Acme.Timetracker.Infrastructure;
@@ -16,4 +17,5 @@ public class TimetrackerContext : DbContext
     }
 
     public DbSet<Employee> Employees { get; set; }
+    public DbSet<Department> Departments { get; set; }
 }

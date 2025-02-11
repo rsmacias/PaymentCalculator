@@ -17,8 +17,7 @@ public sealed class Employee : Entity
         LastName lastName,
         DateOnly birthDate,
         Gender gender,
-        Role role,
-        DateTimeOffset createdOnUtc
+        Role role
     ) : base(id)
     {
         FirstName = firstName;
@@ -26,7 +25,7 @@ public sealed class Employee : Entity
         BirthDate = birthDate;
         Gender = gender;
         Role = role;
-        CreatedOnUtc = createdOnUtc;
+        CreatedOnUtc = DateTimeOffset.UtcNow;
     }
 
     public FirstName FirstName { get; private set; }
