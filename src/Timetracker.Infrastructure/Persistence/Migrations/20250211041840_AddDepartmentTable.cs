@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Acme.Timetracker.Infrastructure.Migrations
+namespace Acme.Timetracker.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
     public partial class AddDepartmentTable : Migration

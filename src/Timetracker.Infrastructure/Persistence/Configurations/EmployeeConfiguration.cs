@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Acme.Timetracker.Infrastructure.Configurations;
+namespace Acme.Timetracker.Infrastructure.Persistence.Configurations;
 
 internal sealed class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
 {

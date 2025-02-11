@@ -4,19 +4,16 @@ using Acme.Timetracker.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Acme.Timetracker.Infrastructure.Migrations
+namespace Acme.Timetracker.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(TimetrackerContext))]
-    [Migration("20250211041840_AddDepartmentTable")]
-    partial class AddDepartmentTable
+    partial class TimetrackerContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -2,7 +2,7 @@
 using Acme.Timetracker.Domain.Employees;
 using Microsoft.EntityFrameworkCore;
 
-namespace Acme.Timetracker.Infrastructure;
+namespace Acme.Timetracker.Infrastructure.Persistence;
 
 public class TimetrackerContext : DbContext
 {

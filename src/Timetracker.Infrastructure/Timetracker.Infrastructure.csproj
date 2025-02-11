@@ -8,4 +8,8 @@
 		<ProjectReference Include="..\Timetracker.Application\Timetracker.Application.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Persistence\" />
+	</ItemGroup>
+
 </Project>

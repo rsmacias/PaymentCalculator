@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Acme.Timetracker.Infrastructure.Migrations
+namespace Acme.Timetracker.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(TimetrackerContext))]
-    [Migration("20250211040258_UpdateEmployeesTable")]
-    partial class UpdateEmployeesTable
+    [Migration("20250209224547_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,21 +31,15 @@ namespace Acme.Timetracker.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateOnly>("BirthDate")
-                        .HasColumnType("date");
-
-                    b.Property<DateTimeOffset>("CreatedOnUtc")
+                    b.Property<DateTime>("CreatedOnUtc")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("datetimeoffset")
-                        .HasDefaultValue(new DateTimeOffset(new DateTime(2025, 2, 11, 4, 2, 58, 171, DateTimeKind.Unspecified).AddTicks(8634), new TimeSpan(0, 0, 0, 0, 0)));
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2025, 2, 9, 22, 45, 46, 755, DateTimeKind.Utc).AddTicks(8923));
 
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
-
-                    b.Property<int>("Gender")
-                        .HasColumnType("int");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -54,9 +48,6 @@ namespace Acme.Timetracker.Infrastructure.Migrations
 
                     b.Property<int>("Role")
                         .HasColumnType("int");
-
-                    b.Property<DateTimeOffset?>("UpdatedOnUtc")
-                        .HasColumnType("datetimeoffset");
 
                     b.HasKey("Id");
 
