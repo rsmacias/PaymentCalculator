@@ -1,4 +1,5 @@
 ﻿using Acme.Timetracker.Domain.Abstractions;
+using Acme.Timetracker.Domain.Departments;
 
 namespace Acme.Timetracker.Domain.Employees;
 
@@ -17,7 +18,8 @@ public sealed class Employee : Entity
         LastName lastName,
         DateOnly birthDate,
         Gender gender,
-        Role role
+        Role role,
+        Guid departmentId
     ) : base(id)
     {
         FirstName = firstName;
@@ -25,6 +27,7 @@ public sealed class Employee : Entity
         BirthDate = birthDate;
         Gender = gender;
         Role = role;
+        DepartmentId = departmentId;
         CreatedOnUtc = DateTimeOffset.UtcNow;
     }
 
@@ -33,6 +36,9 @@ public sealed class Employee : Entity
     public DateOnly BirthDate { get; private set; }
     public Gender Gender { get; private set; }
     public Role Role { get; private set; }
+    public Guid DepartmentId { get; private set; }
     public DateTimeOffset CreatedOnUtc { get; private set; }
     public DateTimeOffset? UpdatedOnUtc { get; private set; }
+    // Navigation Properties
+    public Department Department { get; private set; }
 }

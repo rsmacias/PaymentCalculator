@@ -1,4 +1,5 @@
-﻿using Acme.Timetracker.Domain.Employees;
+﻿using Acme.Timetracker.Domain.Departments;
+using Acme.Timetracker.Domain.Employees;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -29,6 +30,10 @@ internal sealed class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
 
         builder.Property(e => e.Role)
             .HasConversion<int>();
+
+        builder.HasOne<Department>(e => e.Department)
+            .WithMany(d => d.Employees)
+            .HasForeignKey(e => e.DepartmentId);
 
         builder.Property(e => e.CreatedOnUtc)
             .HasDefaultValue(DateTimeOffset.UtcNow);

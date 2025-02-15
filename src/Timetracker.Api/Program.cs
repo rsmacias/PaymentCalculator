@@ -1,4 +1,4 @@
-using Acme.Timetracker.Infrastructure;
+using Acme.Timetracker.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
