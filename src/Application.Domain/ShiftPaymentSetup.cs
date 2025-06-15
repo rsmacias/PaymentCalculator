@@ -15,8 +15,7 @@ public sealed class ShiftPaymentSetup : Entity<long>
 {
     public DayOfWeek Day { get; private set; }
     public DayTypes Type { get; private set; }
-    public TimeOnly StartHour { get; private set; }
-    public TimeOnly EndHour { get; private set; }
+    public TimeRange TimeRange { get; private set; }
     public double Payment { get; private set; }
     public bool IsActive { get; private set; }
 
@@ -24,14 +23,12 @@ public sealed class ShiftPaymentSetup : Entity<long>
         long id, 
         DayOfWeek day, 
         DayTypes type, 
-        TimeOnly startHour, 
-        TimeOnly endHour, 
+        TimeRange timeRange, 
         double payment) : base(id)
     {
         Day = day;
         Type = type;
-        StartHour = startHour;
-        EndHour = endHour;
+        TimeRange = timeRange;
         Payment = payment;
         IsActive = true;
     }

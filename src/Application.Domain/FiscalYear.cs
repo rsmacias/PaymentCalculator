@@ -6,8 +6,7 @@ internal class FiscalYear : Entity<long>
 {
     public string Code { get; private set; }
     public int Year { get; private set; }
-    public DateOnly Start { get; private set; }
-    public DateOnly End { get; private set; }
+    public DateRange DateRange { get; private set; }
 
     private readonly List<Holiday> _holidays = new List<Holiday>();
     public IReadOnlyList<Holiday> Holidays => _holidays.AsReadOnly();
@@ -15,12 +14,10 @@ internal class FiscalYear : Entity<long>
     public FiscalYear(
         long id, 
         int year, 
-        DateOnly start, 
-        DateOnly end) : base(id)
+        DateRange dateRange) : base(id)
     {
         Year = year;
         Code = $"FY{Year}";
-        Start = start;
-        End = end;
+        DateRange = dateRange;
     }
 }

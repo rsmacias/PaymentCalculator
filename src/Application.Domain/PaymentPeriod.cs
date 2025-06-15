@@ -11,8 +11,7 @@ public enum PeriodStatus
 
 public sealed class PaymentPeriod : Entity<long>
 {
-    public DateOnly Start { get; private set; }
-    public DateOnly End { get; private set; }
+    public DateRange DateRange { get; private set; }
     public PeriodStatus Status { get; private set; }
 
     private readonly List<PaymentRole> _payments = new List<PaymentRole>();
@@ -20,12 +19,10 @@ public sealed class PaymentPeriod : Entity<long>
 
     public PaymentPeriod(
         long id, 
-        DateOnly start, 
-        DateOnly end, 
+        DateRange dateRange,
         PeriodStatus status) : base(id)
     {
-        Start = start;
-        End = end;
+        DateRange = dateRange;
         Status = status;
     }
 }

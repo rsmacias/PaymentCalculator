@@ -18,25 +18,22 @@ public sealed class Timesheet : Entity<long>
     public Employee Employee { get; private set; }
     public WorkTypes Type { get; private set; }
     public DateOnly Date { get; private set; }
-    public TimeOnly Start { get; private set; }
-    public TimeOnly End { get; private set; }
+    public TimeRange TimeRange { get; private set; }
     public string Details { get; private set; }
 
     public Timesheet(
         long id, 
         Employee employee, 
         WorkTypes type, 
-        DateOnly date, 
-        TimeOnly start, 
-        TimeOnly end, 
+        DateOnly date,
+        TimeRange timeRange,
         string details) : base(id)
     {
         Employee = employee;
         EmployeeId = Employee.Id;
         Type = type;
         Date = date;
-        Start = start;
-        End = end;
+        TimeRange = timeRange;
         Details = details;
     }
 }
