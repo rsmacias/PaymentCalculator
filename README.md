@@ -1,6 +1,10 @@
 # Payment Calculator App
 This is a console app to calculate the amount to pay to employees based on the hours which they worked in a specific schedule.
 
+## Domain Model Details
+
+![Domain Model](docs/images/domain-model.png)
+
 ## Solution Overview 
 It defines on a text file the amounts to pay per day and the hours worked in the week. The app reads this file to get at memory this configuration to calculate later the final amounts.
 
