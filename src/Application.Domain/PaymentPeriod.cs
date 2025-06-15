@@ -14,6 +14,9 @@ public sealed class PaymentPeriod
     public DateOnly End { get; private set; }
     public PeriodStatus Status { get; private set; }
 
+    private readonly List<PaymentRole> _payments = new List<PaymentRole>();
+    public IReadOnlyList<PaymentRole> Payments => _payments.AsReadOnly();
+
     public PaymentPeriod(
         long id, 
         DateOnly start, 

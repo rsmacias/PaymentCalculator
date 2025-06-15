@@ -16,8 +16,12 @@ public sealed class Employee
     public DateOnly BirthDate { get; private set; }
     public WorkStatus Status { get; private set; }
 
-    private readonly List<Timesheet> _workedHours = new List<Timesheet>();
-    public IReadOnlyList<Timesheet> WorkedHours => _workedHours.AsReadOnly();
+    private readonly List<Timesheet> _reportedWorkingHours = new List<Timesheet>();
+    public IReadOnlyList<Timesheet> ReportedWorkingHours => _reportedWorkingHours.AsReadOnly();
+
+    private readonly List<PaymentRole> _payments = new List<PaymentRole>();
+    public IReadOnlyList<PaymentRole> Payments => _payments.AsReadOnly();
+
 
     public Employee(
         long id, 
