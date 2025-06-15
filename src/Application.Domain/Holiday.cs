@@ -1,8 +1,9 @@
-﻿namespace Application.Domain;
+﻿using Application.Domain.Abstractions;
 
-internal class Holiday
+namespace Application.Domain;
+
+internal class Holiday : Entity<long>
 {
-    public long Id { get; private set; }
     public long FiscalYearId { get; private set; }
     public FiscalYear FiscalYear { get; private set; }
     public string Name { get; private set; }
@@ -14,9 +15,8 @@ internal class Holiday
         FiscalYear fiscalYear, 
         DateOnly date, 
         string name, 
-        string? description)
+        string? description) : base(id)
     {
-        Id = id;
         FiscalYear = fiscalYear;
         FiscalYearId = FiscalYear.Id;
         Date = date;

@@ -1,8 +1,9 @@
-﻿namespace Application.Domain;
+﻿using Application.Domain.Abstractions;
 
-internal class FiscalYear
+namespace Application.Domain;
+
+internal class FiscalYear : Entity<long>
 {
-    public long Id { get; private set; }
     public string Code { get; private set; }
     public int Year { get; private set; }
     public DateOnly Start { get; private set; }
@@ -15,9 +16,8 @@ internal class FiscalYear
         long id, 
         int year, 
         DateOnly start, 
-        DateOnly end)
+        DateOnly end) : base(id)
     {
-        Id = id;
         Year = year;
         Code = $"FY{Year}";
         Start = start;

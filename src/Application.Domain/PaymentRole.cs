@@ -1,9 +1,9 @@
-﻿namespace Application.Domain;
+﻿using Application.Domain.Abstractions;
 
-public sealed class PaymentRole
+namespace Application.Domain;
+
+public sealed class PaymentRole : Entity<long>
 {
-    public long Id { get; private set; }
-
     public PaymentPeriod PaymentPeriod { get; private set; }
     public long PaymentPeriodId { get; private set; }
 
@@ -18,9 +18,8 @@ public sealed class PaymentRole
         PaymentPeriod paymentPeriod, 
         Employee employee, 
         double workedHours, 
-        double payment)
+        double payment) : base(id)
     {
-        Id = id;
         PaymentPeriod = paymentPeriod;
         PaymentPeriodId = PaymentPeriod.Id;
         Employee = employee;

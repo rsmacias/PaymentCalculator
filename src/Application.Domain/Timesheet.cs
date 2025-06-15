@@ -1,4 +1,6 @@
-﻿namespace Application.Domain;
+﻿using Application.Domain.Abstractions;
+
+namespace Application.Domain;
 
 public enum WorkTypes
 {
@@ -10,9 +12,8 @@ public enum WorkTypes
     DeploymentSupport = 6
 }
 
-public sealed class Timesheet
+public sealed class Timesheet : Entity<long>
 {
-    public long Id { get; private set; }
     public long EmployeeId { get; private set; }
     public Employee Employee { get; private set; }
     public WorkTypes Type { get; private set; }
@@ -28,9 +29,8 @@ public sealed class Timesheet
         DateOnly date, 
         TimeOnly start, 
         TimeOnly end, 
-        string details)
+        string details) : base(id)
     {
-        Id = id;
         Employee = employee;
         EmployeeId = Employee.Id;
         Type = type;

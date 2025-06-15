@@ -1,4 +1,6 @@
-﻿namespace Application.Domain;
+﻿using Application.Domain.Abstractions;
+
+namespace Application.Domain;
 
 public enum WorkStatus
 {
@@ -7,9 +9,8 @@ public enum WorkStatus
     Retired = 3
 }
 
-public sealed class Employee
+public sealed class Employee : Entity<long>
 {
-    public long Id { get; private set; }
     public string FirstName { get; private set; }
     public string? MiddleName { get; private set; }
     public string LastName { get; private set; }
@@ -29,9 +30,8 @@ public sealed class Employee
         string? middleName, 
         string lastName, 
         DateOnly birthDate, 
-        WorkStatus status)
+        WorkStatus status) : base(id)
     {
-        Id = id;
         FirstName = firstName;
         MiddleName = middleName;
         LastName = lastName;

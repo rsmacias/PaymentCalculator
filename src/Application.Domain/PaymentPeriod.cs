@@ -1,4 +1,6 @@
-﻿namespace Application.Domain;
+﻿using Application.Domain.Abstractions;
+
+namespace Application.Domain;
 
 public enum PeriodStatus
 {
@@ -7,9 +9,8 @@ public enum PeriodStatus
     Paid = 2
 }
 
-public sealed class PaymentPeriod
+public sealed class PaymentPeriod : Entity<long>
 {
-    public long Id { get; private set; }
     public DateOnly Start { get; private set; }
     public DateOnly End { get; private set; }
     public PeriodStatus Status { get; private set; }
@@ -21,9 +22,8 @@ public sealed class PaymentPeriod
         long id, 
         DateOnly start, 
         DateOnly end, 
-        PeriodStatus status)
+        PeriodStatus status) : base(id)
     {
-        Id = id;
         Start = start;
         End = end;
         Status = status;

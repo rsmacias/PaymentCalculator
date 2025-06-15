@@ -1,4 +1,6 @@
-﻿namespace Application.Domain;
+﻿using Application.Domain.Abstractions;
+
+namespace Application.Domain;
 
 public enum DayTypes
 {
@@ -9,9 +11,8 @@ public enum DayTypes
     SickLeave = 5
 }
 
-public sealed class ShiftPaymentSetup
+public sealed class ShiftPaymentSetup : Entity<long>
 {
-    public long Id { get; private set; }
     public DayOfWeek Day { get; private set; }
     public DayTypes Type { get; private set; }
     public TimeOnly StartHour { get; private set; }
@@ -25,9 +26,8 @@ public sealed class ShiftPaymentSetup
         DayTypes type, 
         TimeOnly startHour, 
         TimeOnly endHour, 
-        double payment)
+        double payment) : base(id)
     {
-        Id = id;
         Day = day;
         Type = type;
         StartHour = startHour;
