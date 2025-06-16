@@ -27,12 +27,12 @@ public sealed class Employee : Entity<long>, IAggregateRoot
     public IReadOnlyList<PaymentRole> Payments => _payments.AsReadOnly();
 
 
-    public Employee(
+    private Employee(
         long id, 
         string firstName, 
         string? middleName, 
         string lastName, 
-        DateOnly birthDate, 
+        DateOnly birthDate,  // Make this property a Value Object
         WorkStatus status) : base(id)
     {
         FirstName = firstName;
@@ -40,6 +40,35 @@ public sealed class Employee : Entity<long>, IAggregateRoot
         LastName = lastName;
         BirthDate = birthDate;
         Status = status;
+    }
+
+    public static Result<Employee> Create(
+        string firstName, 
+        string? middleName, 
+        string lastName, 
+        DateOnly birthDate)
+    {
+        if (string.IsNullOrWhiteSpace(firstName))
+            return Result.Fail("First name is not valid.");
+
+        if (string.IsNullOrWhiteSpace(lastName))
+            return Result.Fail("Last name is not valid.");
+
+        var newApplicant = new Employee(0L, firstName, middleName, lastName, birthDate, WorkStatus.Applicant);
+
+        return Result.Ok(newApplicant);
+    }
+
+    public void Hire()
+    {
+        if (Status != WorkStatus.Hired)
+            Status = WorkStatus.Hired;
+    }
+
+    public void Fire()
+    {
+        if (Status == WorkStatus.Hired)
+            Status = WorkStatus.Retired;
     }
 
     public Result<Timesheet> ReportTimeSheet(
