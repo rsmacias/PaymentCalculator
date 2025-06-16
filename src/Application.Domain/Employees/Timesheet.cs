@@ -52,7 +52,7 @@ public sealed class Timesheet : Entity<long>
         var today = DateOnly.FromDateTime(DateTime.Today);
 
         if (date > today)
-            return Result.Fail("The task details must be provided.");
+            return Result.Fail("The date of the task is not valid.");
 
         var timesheet = new Timesheet(0L, employee, type, date, timeRange, details);
 
