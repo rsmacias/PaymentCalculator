@@ -10,7 +10,7 @@ public enum WorkStatus
     Retired = 3
 }
 
-public sealed class Employee : Entity<long>
+public sealed class Employee : Entity<long>, IAggregateRoot
 {
     public string FirstName { get; private set; }
     public string? MiddleName { get; private set; }

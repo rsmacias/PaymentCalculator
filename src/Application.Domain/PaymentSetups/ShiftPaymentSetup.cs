@@ -12,7 +12,7 @@ public enum DayTypes
     SickLeave = 5
 }
 
-public sealed class ShiftPaymentSetup : Entity<long>
+public sealed class ShiftPaymentSetup : Entity<long>, IAggregateRoot
 {
     public DayOfWeek Day { get; private set; }
     public DayTypes Type { get; private set; }

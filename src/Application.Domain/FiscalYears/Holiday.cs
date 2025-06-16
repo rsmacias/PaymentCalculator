@@ -2,7 +2,7 @@
 
 namespace Application.Domain.FiscalYears;
 
-internal class Holiday : Entity<long>
+public class Holiday : Entity<long>
 {
     public long FiscalYearId { get; private set; }
     public FiscalYear FiscalYear { get; private set; }

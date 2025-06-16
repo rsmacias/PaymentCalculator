@@ -3,7 +3,7 @@ using Application.Domain.Shared;
 
 namespace Application.Domain.FiscalYears;
 
-internal class FiscalYear : Entity<long>
+public class FiscalYear : Entity<long>, IAggregateRoot
 {
     public string Code { get; private set; }
     public int Year { get; private set; }

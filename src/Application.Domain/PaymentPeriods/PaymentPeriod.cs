@@ -10,7 +10,7 @@ public enum PeriodStatus
     Paid = 2
 }
 
-public sealed class PaymentPeriod : Entity<long>
+public sealed class PaymentPeriod : Entity<long>, IAggregateRoot
 {
     public DateRange DateRange { get; private set; }
     public PeriodStatus Status { get; private set; }
