@@ -1,4 +1,4 @@
-# Payment Calculator App
+# Payment Hub
 This is a console app to calculate the amount to pay to employees based on the hours which they worked in a specific schedule.
 
 ## Domain Model Details
