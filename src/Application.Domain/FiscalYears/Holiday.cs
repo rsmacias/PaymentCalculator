@@ -1,6 +1,6 @@
 ﻿using Application.Domain.Abstractions;
 
-namespace Application.Domain;
+namespace Application.Domain.FiscalYears;
 
 internal class Holiday : Entity<long>
 {

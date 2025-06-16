@@ -1,4 +1,4 @@
-﻿namespace Application.Domain;
+﻿namespace Application.Domain.Shared;
 
 public record TimeRange
 {

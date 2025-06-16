@@ -1,6 +1,7 @@
 ﻿using Application.Domain.Abstractions;
+using Application.Domain.Shared;
 
-namespace Application.Domain;
+namespace Application.Domain.FiscalYears;
 
 internal class FiscalYear : Entity<long>
 {

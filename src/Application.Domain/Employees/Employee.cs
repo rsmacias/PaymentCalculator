@@ -1,6 +1,7 @@
 ﻿using Application.Domain.Abstractions;
+using Application.Domain.PaymentPeriods;
 
-namespace Application.Domain;
+namespace Application.Domain.Employees;
 
 public enum WorkStatus
 {

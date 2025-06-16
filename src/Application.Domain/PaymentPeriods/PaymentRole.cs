@@ -1,6 +1,7 @@
 ﻿using Application.Domain.Abstractions;
+using Application.Domain.Employees;
 
-namespace Application.Domain;
+namespace Application.Domain.PaymentPeriods;
 
 public sealed class PaymentRole : Entity<long>
 {
