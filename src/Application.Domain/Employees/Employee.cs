@@ -1,5 +1,7 @@
 ﻿using Application.Domain.Abstractions;
 using Application.Domain.PaymentPeriods;
+using Application.Domain.Shared;
+using FluentResults;
 
 namespace Application.Domain.Employees;
 
@@ -38,5 +40,26 @@ public sealed class Employee : Entity<long>, IAggregateRoot
         LastName = lastName;
         BirthDate = birthDate;
         Status = status;
+    }
+
+    public Result<Timesheet> ReportTimeSheet(
+        WorkTypes type, 
+        DateOnly date, 
+        TimeRange timeRange, 
+        string details)
+    {
+        if (Status != WorkStatus.Hired)
+            return Result.Fail("Currently, the employee is not hired.");
+
+        var timesheetRegistration = Timesheet.Register(this, type, date, timeRange, details);
+
+        if (timesheetRegistration.IsFailed)
+            return timesheetRegistration;
+
+        var timesheetReport = timesheetRegistration.Value;
+
+        _reportedWorkingHours.Add(timesheetReport);
+
+        return Result.Ok(timesheetReport);
     }
 }

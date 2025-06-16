@@ -46,10 +46,12 @@ public sealed class Timesheet : Entity<long>
         TimeRange timeRange,
         string details)
     {
-        if (employee.Status != WorkStatus.Hired)
-            return Result.Fail("Currently, the employee is not hired.");
-
         if (string.IsNullOrWhiteSpace(details))
+            return Result.Fail("The task details must be provided.");
+        
+        var today = DateOnly.FromDateTime(DateTime.Today);
+
+        if (date > today)
             return Result.Fail("The task details must be provided.");
 
         var timesheet = new Timesheet(0L, employee, type, date, timeRange, details);
