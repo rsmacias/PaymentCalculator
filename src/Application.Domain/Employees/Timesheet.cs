@@ -1,5 +1,6 @@
 ﻿using Application.Domain.Abstractions;
 using Application.Domain.Shared;
+using FluentResults;
 
 namespace Application.Domain.Employees;
 
@@ -22,7 +23,7 @@ public sealed class Timesheet : Entity<long>
     public TimeRange TimeRange { get; private set; }
     public string Details { get; private set; }
 
-    public Timesheet(
+    private Timesheet(
         long id, 
         Employee employee, 
         WorkTypes type, 
@@ -36,5 +37,23 @@ public sealed class Timesheet : Entity<long>
         Date = date;
         TimeRange = timeRange;
         Details = details;
+    }
+
+    public static Result<Timesheet> Register(
+        Employee employee, 
+        WorkTypes type, 
+        DateOnly date, 
+        TimeRange timeRange,
+        string details)
+    {
+        if (employee.Status != WorkStatus.Hired)
+            return Result.Fail("Currently, the employee is not hired.");
+
+        if (string.IsNullOrWhiteSpace(details))
+            return Result.Fail("The task details must be provided.");
+
+        var timesheet = new Timesheet(0L, employee, type, date, timeRange, details);
+
+        return Result.Ok(timesheet);
     }
 }
