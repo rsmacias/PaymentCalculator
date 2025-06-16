@@ -17,7 +17,7 @@ public sealed class Employee : Entity<long>, IAggregateRoot
     public string FirstName { get; private set; }
     public string? MiddleName { get; private set; }
     public string LastName { get; private set; }
-    public DateOnly BirthDate { get; private set; }
+    public BirthDate BirthDate { get; private set; }
     public WorkStatus Status { get; private set; }
 
     private readonly List<Timesheet> _reportedWorkingHours = new List<Timesheet>();
@@ -32,7 +32,7 @@ public sealed class Employee : Entity<long>, IAggregateRoot
         string firstName, 
         string? middleName, 
         string lastName, 
-        DateOnly birthDate,  // Make this property a Value Object
+        BirthDate birthDate,
         WorkStatus status) : base(id)
     {
         FirstName = firstName;
@@ -46,13 +46,16 @@ public sealed class Employee : Entity<long>, IAggregateRoot
         string firstName, 
         string? middleName, 
         string lastName, 
-        DateOnly birthDate)
+        BirthDate birthDate)
     {
         if (string.IsNullOrWhiteSpace(firstName))
             return Result.Fail("First name is not valid.");
 
         if (string.IsNullOrWhiteSpace(lastName))
             return Result.Fail("Last name is not valid.");
+
+        if (!birthDate.IsLegalAge())
+            return Result.Fail("The applicant is a minor.");
 
         var newApplicant = new Employee(0L, firstName, middleName, lastName, birthDate, WorkStatus.Applicant);
 
