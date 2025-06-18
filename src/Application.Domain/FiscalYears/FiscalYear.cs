@@ -1,4 +1,5 @@
 ﻿using Application.Domain.Abstractions;
+using Application.Domain.PayrollPeriods;
 using Application.Domain.Shared;
 using FluentResults;
 
@@ -20,6 +21,9 @@ public class FiscalYear : Entity<long>, IAggregateRoot
 
     private readonly List<Holiday> _holidays = new List<Holiday>();
     public IReadOnlyList<Holiday> Holidays => _holidays.AsReadOnly();
+
+    private readonly List<PayrollPeriod> _payrollPeriods = new List<PayrollPeriod>();
+    public IReadOnlyList<PayrollPeriod> PayrollPeriods => _payrollPeriods.AsReadOnly();
 
     private FiscalYear(
         long id, 
