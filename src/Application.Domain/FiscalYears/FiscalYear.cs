@@ -4,11 +4,19 @@ using FluentResults;
 
 namespace Application.Domain.FiscalYears;
 
+public enum FiscalYearStatus
+{
+    Standby = 1,
+    Ongoing = 2,
+    Finished = 3
+}
+
 public class FiscalYear : Entity<long>, IAggregateRoot
 {
     public string Code { get; private set; }
     public int Year { get; private set; }
     public DateRange DateRange { get; private set; }
+    public FiscalYearStatus Status { get; private set; }
 
     private readonly List<Holiday> _holidays = new List<Holiday>();
     public IReadOnlyList<Holiday> Holidays => _holidays.AsReadOnly();
@@ -21,6 +29,7 @@ public class FiscalYear : Entity<long>, IAggregateRoot
         Year = year;
         Code = $"FY{Year}";
         DateRange = dateRange;
+        Status = FiscalYearStatus.Standby;
     }
 
     public Result<List<Holiday>> AddHoliday(
