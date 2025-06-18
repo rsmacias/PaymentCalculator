@@ -34,6 +34,9 @@ public class Holiday : Entity<long>
         if (string.IsNullOrWhiteSpace(name))
             return Result.Fail("Holiday name is not valid.");
 
+        if (!date.IsBetween(fiscalYear.DateRange))
+            return Result.Fail($"Holiday date '{date.ToString("MM-dd-yyyy")}' is not valid for the fiscal year '{fiscalYear.Code}'.");
+
         var today = DateOnly.FromDateTime(DateTime.Today);
 
         if (date <= today)
