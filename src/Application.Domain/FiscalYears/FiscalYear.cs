@@ -21,7 +21,7 @@ public class FiscalYear : Entity<long>, IAggregateRoot
     private readonly List<Holiday> _holidays = new List<Holiday>();
     public IReadOnlyList<Holiday> Holidays => _holidays.AsReadOnly();
 
-    public FiscalYear(
+    private FiscalYear(
         long id, 
         int year, 
         DateRange dateRange) : base(id)
@@ -30,6 +30,36 @@ public class FiscalYear : Entity<long>, IAggregateRoot
         Code = $"FY{Year}";
         DateRange = dateRange;
         Status = FiscalYearStatus.Standby;
+    }
+
+    public static Result<FiscalYear> Create(int year, DateRange dateRange)
+    {
+        if (dateRange.TotalMonths != 12)
+            return Result.Fail("Invalid dates range for the fiscal year.");
+
+        var fiscalYear = new FiscalYear(0L, year, dateRange);
+
+        return Result.Ok(fiscalYear);
+    }
+
+    public void Start()
+    {
+        var today = DateOnly.FromDateTime(DateTime.Today);
+
+        if (Status == FiscalYearStatus.Standby && today.IsBetween(DateRange))
+        {
+            Status = FiscalYearStatus.Ongoing;
+        }
+    }
+
+    public void Finish()
+    {
+        var today = DateOnly.FromDateTime(DateTime.Today);
+
+        if(Status == FiscalYearStatus.Ongoing  && today > DateRange.End)
+        {
+            Status = FiscalYearStatus.Finished;
+        }
     }
 
     public Result<List<Holiday>> AddHoliday(
