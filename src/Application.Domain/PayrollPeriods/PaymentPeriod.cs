@@ -1,7 +1,7 @@
 ﻿using Application.Domain.Abstractions;
 using Application.Domain.Shared;
 
-namespace Application.Domain.PaymentPeriods;
+namespace Application.Domain.PayrollPeriods;
 
 public enum PeriodStatus
 {
