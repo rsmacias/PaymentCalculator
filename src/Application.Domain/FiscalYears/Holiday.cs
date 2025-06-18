@@ -1,4 +1,5 @@
 ﻿using Application.Domain.Abstractions;
+using FluentResults;
 
 namespace Application.Domain.FiscalYears;
 
@@ -10,7 +11,7 @@ public class Holiday : Entity<long>
     public string? Description { get; private set; }
     public DateOnly Date { get; private set; }
 
-    public Holiday(
+    private Holiday(
         long id, 
         FiscalYear fiscalYear, 
         DateOnly date, 
@@ -22,5 +23,24 @@ public class Holiday : Entity<long>
         Date = date;
         Name = name;
         Description = description;
+    }
+
+    public static Result<Holiday> Create(
+        FiscalYear fiscalYear, 
+        DateOnly date, 
+        string name, 
+        string? description)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            return Result.Fail("Holiday name is not valid.");
+
+        var today = DateOnly.FromDateTime(DateTime.Today);
+
+        if (date <= today)
+            return Result.Fail($"It is too late to set this date '{date.ToString("MM-dd-yyyy")}' as holiday.");
+
+        var holiday = new Holiday(0L, fiscalYear, date, name, description);
+
+        return Result.Ok(holiday);
     }
 }
