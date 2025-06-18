@@ -3,10 +3,10 @@ using Application.Domain.Employees;
 
 namespace Application.Domain.PayrollPeriods;
 
-public sealed class PaymentRole : Entity<long>
+public sealed class Payroll : Entity<long>
 {
-    public PaymentPeriod PaymentPeriod { get; private set; }
-    public long PaymentPeriodId { get; private set; }
+    public PayrollPeriod Period { get; private set; }
+    public long PeriodId { get; private set; }
 
     public Employee Employee { get; private set; }
     public long EmployeeId { get; private set; }
@@ -14,15 +14,15 @@ public sealed class PaymentRole : Entity<long>
     public double WorkedHours { get; private set; }
     public double Payment { get; private set; }
 
-    public PaymentRole(
+    public Payroll(
         long id, 
-        PaymentPeriod paymentPeriod, 
+        PayrollPeriod period, 
         Employee employee, 
         double workedHours, 
         double payment) : base(id)
     {
-        PaymentPeriod = paymentPeriod;
-        PaymentPeriodId = PaymentPeriod.Id;
+        Period = period;
+        PeriodId = Period.Id;
         Employee = employee;
         EmployeeId = Employee.Id;
         WorkedHours = workedHours;

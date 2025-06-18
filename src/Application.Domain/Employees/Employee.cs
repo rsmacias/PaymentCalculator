@@ -1,5 +1,5 @@
 ﻿using Application.Domain.Abstractions;
-using Application.Domain.PaymentPeriods;
+using Application.Domain.PayrollPeriods;
 using Application.Domain.Shared;
 using FluentResults;
 
@@ -23,8 +23,8 @@ public sealed class Employee : Entity<long>, IAggregateRoot
     private readonly List<Timesheet> _reportedWorkingHours = new List<Timesheet>();
     public IReadOnlyList<Timesheet> ReportedWorkingHours => _reportedWorkingHours.AsReadOnly();
 
-    private readonly List<PaymentRole> _payments = new List<PaymentRole>();
-    public IReadOnlyList<PaymentRole> Payments => _payments.AsReadOnly();
+    private readonly List<Payroll> _payments = new List<Payroll>();
+    public IReadOnlyList<Payroll> Payments => _payments.AsReadOnly();
 
 
     private Employee(

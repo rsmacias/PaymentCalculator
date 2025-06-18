@@ -2,6 +2,6 @@
 
 namespace Application.Domain.PayrollPeriods;
 
-public interface IPaymentPeriod : IRepository<PaymentPeriod>
+public interface IPayrollPeriod : IRepository<PayrollPeriod>
 {
 }
